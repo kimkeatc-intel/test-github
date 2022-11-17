@@ -40,6 +40,7 @@ jobs:
           echo "github.event.commits.committer.username     : ${{ github.event.commits.committer.username }}"
 
           echo "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+"
+          echo "github.event.commits.author    : ${{ toJSON(github.event.commits) }}'"
           echo 'github.event.commits.author    : ${{ toJSON(github.event.commits) }}' | jq ".[0].author"'
           echo 'github.event.commits.committer : ${{ toJSON(github.event.commits) }}' | jq ".[0].committer"'
           echo '${{ toJSON(github.event.commits) }}' | jq ".[0].added"'
