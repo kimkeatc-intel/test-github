@@ -20,5 +20,18 @@ jobs:
           git rev-parse --verify --short HEAD
           git branch  --show-current
           git log -n 1
-          echo ${{ github.event.after }}
-          echo ${{ github.event.before }}
+          echo "github.event.base_ref    : ${{ github.event.base_ref }}"
+          echo "github.event.ref         : ${{ github.event.ref }}"
+          echo "github.event.after       : ${{ github.event.after }}"
+          echo "github.event.before      : ${{ github.event.before }}"
+          echo "github.event.compare     : ${{ github.event.compare }}"
+          echo "github.event.created     : ${{ github.event.created }}"
+          echo "github.event.deleted     : ${{ github.event.deleted }}"
+          echo "github.event.forced      : ${{ github.event.forced }}"
+
+          echo "github.event.commits.added     : ${{ github.event.commits.added }}"
+          echo "github.event.commits.modified  : ${{ github.event.commits.modified }}"
+          echo "github.event.commits.removed   : ${{ github.event.commits.removed }}"
+          echo "github.event.commits.url       : ${{ github.event.commits.url }}"
+          echo "github.event.commits.author    : ${{ github.event.commits.author }}"
+          echo "github.event.commits.committer.username     : ${{ github.event.commits.committer.username }}"
