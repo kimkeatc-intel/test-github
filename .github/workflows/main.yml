@@ -13,6 +13,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Print jq
         run: |
+          which jq
           jq --help
       - name: Print git version
         run: |
@@ -39,7 +40,44 @@ jobs:
           echo "github.event.commits.author    : ${{ github.event.commits.author }}"
           echo "github.event.commits.committer.username     : ${{ github.event.commits.committer.username }}"
 
-          echo "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+"
+          echo '+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+'
+          echo '| toJSON(github.event.commits)'
+          echo '+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+'
           echo '${{ toJSON(github.event.commits) }}'
+          echo ''
+          echo '+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+'
+          echo '| toJSON(github.event.commits.author)'
+          echo '+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+'
           echo '${{ toJSON(github.event.commits) }}' | jq '.[0].author'
+          echo ''
+          echo '+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+'
+          echo '| toJSON(github.event.commits.comitter)'
+          echo '+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+'
           echo '${{ toJSON(github.event.commits) }}' | jq '.[0].committer'
+          echo ''
+
+          echo '+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+'
+          echo ${{ github.event.commits.added[*] }}
+          echo ${{ github.event.commits.added[0] }}
+          echo ${{ github.event.commits.added[*][0] }}
+          echo ${{ github.event.commits.modified[*] }}
+          echo ${{ github.event.commits.modified[0] }}
+          echo ${{ github.event.commits.modified[*][0] }}
+          echo ${{ github.event.commits.removed[*] }}
+          echo ${{ github.event.commits.removed[0] }}
+          echo ${{ github.event.commits.removed[*][0] }}
+          echo '+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+'
+          for item in ${{ github.event.commits.added }}
+          do
+            echo $item
+          done
+
+          for item in ${{ github.event.commits.modified }}
+          do
+            echo $item
+          done
+
+          for item in ${{ github.event.commits.removed }}
+          do
+            echo $item
+          done
