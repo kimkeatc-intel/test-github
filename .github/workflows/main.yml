@@ -1,0 +1,24 @@
+name: Template of GitHub Workflow
+
+on: push
+
+permissions:
+  contents: read
+
+jobs:
+  job_name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Print git version
+        run: |
+          git version
+      - name: Run git command
+        run: |
+          git log --oneline
+          git rev-parse --verify --short HEAD
+          git branch  --show-current
+          git log -n 1
+          echo ${{ github.event.after }}
+          echo ${{ github.event.before }}
