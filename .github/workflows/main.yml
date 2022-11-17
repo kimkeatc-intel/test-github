@@ -41,5 +41,5 @@ jobs:
 
           echo "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+"
           echo ${{ toJSON(github.event.commits) }}
-          echo ${{ toJSON(github.event.commits) }}' | jq ".[0].author"
-          echo ${{ toJSON(github.event.commits) }}' | jq ".[0].committer"
+          echo '${{ toJSON(github.event.commits) }}' | jq ".[0].author"
+          echo '${{ toJSON(github.event.commits) }}' | jq ".[0].committer"
