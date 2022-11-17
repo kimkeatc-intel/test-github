@@ -11,6 +11,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Print jq
+        run: |
+          jq --help
       - name: Print git version
         run: |
           git version
@@ -36,7 +39,9 @@ jobs:
           echo "github.event.commits.author    : ${{ github.event.commits.author }}"
           echo "github.event.commits.committer.username     : ${{ github.event.commits.committer.username }}"
 
-          echo '${{ toJSON(github.event.commits) }}' | jq ".[0].author"
-          echo '${{ toJSON(github.event.commits) }}' | jq ".[0].added"
-          echo '${{ toJSON(github.event.commits) }}' | jq ".[0].modified"
-          echo '${{ toJSON(github.event.commits) }}' | jq ".[0].removed"
+          echo "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+"
+          echo "github.event.commits.author    : ${{ toJSON(github.event.commits) }}' | jq ".[0].author"
+          echo "github.event.commits.committer : ${{ toJSON(github.event.commits) }}' | jq ".[0].committer"
+          echo "${{ toJSON(github.event.commits) }}' | jq ".[0].added"
+          echo "${{ toJSON(github.event.commits) }}' | jq ".[0].modified"
+          echo "${{ toJSON(github.event.commits) }}' | jq ".[0].removed"
