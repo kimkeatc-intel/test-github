@@ -29,7 +29,7 @@ jobs:
           echo "github.event.deleted     : ${{ github.event.deleted }}"
           echo "github.event.forced      : ${{ github.event.forced }}"
 
-          echo "github.event.commits.added     : ${{ github.event.commits.added }}"
+          echo "github.event.commits.added     : ${{ github.event.commits.added[0] }}"
           echo "github.event.commits.modified  : ${{ github.event.commits.modified }}"
           echo "github.event.commits.removed   : ${{ github.event.commits.removed }}"
           echo "github.event.commits.url       : ${{ github.event.commits.url }}"
