@@ -30,8 +30,13 @@ jobs:
           echo "github.event.forced      : ${{ github.event.forced }}"
 
           echo "github.event.commits.added     : ${{ github.event.commits.added[0] }}"
-          echo "github.event.commits.modified  : ${{ github.event.commits.modified }}"
-          echo "github.event.commits.removed   : ${{ github.event.commits.removed }}"
+          echo "github.event.commits.modified  : ${{ github.event.commits.modified[0] }}"
+          echo "github.event.commits.removed   : ${{ github.event.commits.removed[0] }}"
           echo "github.event.commits.url       : ${{ github.event.commits.url }}"
           echo "github.event.commits.author    : ${{ github.event.commits.author }}"
           echo "github.event.commits.committer.username     : ${{ github.event.commits.committer.username }}"
+
+          echo '${{ toJSON(github.event.commits) }}' | jq ".[0].author"
+          echo '${{ toJSON(github.event.commits) }}' | jq ".[0].added"
+          echo '${{ toJSON(github.event.commits) }}' | jq ".[0].modified"
+          echo '${{ toJSON(github.event.commits) }}' | jq ".[0].removed"
