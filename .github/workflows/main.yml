@@ -18,6 +18,8 @@ jobs:
 
       - name: List all changed files
         run: |
+          export workflow_has_changed=false
+          echo $workflow_has_changed
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
           done
