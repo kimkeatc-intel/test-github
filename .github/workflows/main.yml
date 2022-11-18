@@ -11,11 +11,32 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: List all changed files
         run: |
-          echo "github.event.after       : ${{ github.event.after }}"
-          echo "---------------"
-          git show --pretty="" --name-only HEAD
-          echo "---------------"
-          git show
+          git diff --name-only HEAD HEAD^1
+          echo "----------"
+          if git diff --name-only HEAD HEAD^1 | grep .github/workflows/main.yml; then
+            echo found
+          else
+            echo not found
+          fi
+
+          if git diff --name-only HEAD HEAD^1 | grep .github/workflows/main2.yml; then
+            echo found
+          else
+            echo not found
+          fi
+      - name: Create release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Create release
+          draft: false
+          prerelease: false
