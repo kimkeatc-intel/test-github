@@ -21,5 +21,12 @@ jobs:
           export workflow_has_changed=false
           echo $workflow_has_changed
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            if [[ "${file}" == ".github/workflows/main.yml" ]] ; then
+              echo Found
+              export workflow_has_changed=true
+            else
+              echo Not found
+            fi
             echo "$file was changed"
           done
+          echo $workflow_has_changed
