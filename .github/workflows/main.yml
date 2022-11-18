@@ -12,27 +12,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v34
-
       - name: List all changed files
         run: |
-          export workflow_has_changed=false
-          export file_10_has_changed=false
-
-          echo $workflow_has_changed
-          echo $file_10_has_changed
-
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            if [[ "${file}" == ".github/workflows/main.yml" ]] ; then
-              export workflow_has_changed=true
-            fi
-            if [[ "${file}" == "file_10.txt" ]] ; then
-              export file_10_has_changed=true
-            fi
-            echo "$file was changed"
-          done
-
-          echo $workflow_has_changed
-          echo $file_10_has_changed
+          echo "github.event.after       : ${{ github.event.after }}"
+          echo "---------------"
+          git show --pretty="" --name-only HEAD
+          echo "---------------"
+          git show
