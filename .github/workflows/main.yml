@@ -19,14 +19,20 @@ jobs:
       - name: List all changed files
         run: |
           export workflow_has_changed=false
+          export file_10_has_changed=false
+
           echo $workflow_has_changed
+          echo $file_10_has_changed
+
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             if [[ "${file}" == ".github/workflows/main.yml" ]] ; then
-              echo Found
               export workflow_has_changed=true
-            else
-              echo Not found
+            fi
+            if [[ "${file}" == "file_10.txt" ]] ; then
+              export file_10_has_changed=true
             fi
             echo "$file was changed"
           done
+
           echo $workflow_has_changed
+          echo $file_10_has_changed
